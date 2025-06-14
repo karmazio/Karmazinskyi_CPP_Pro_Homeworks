@@ -24,12 +24,24 @@
     <ClCompile Include="Sensor.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderProcessor.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sensor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderProcessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
