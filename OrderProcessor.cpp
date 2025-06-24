@@ -7,14 +7,14 @@ std::vector<Order> OrderProcessor::validateOrders(const std::vector<Order>& rawO
 
     auto orders = rawOrders;
     int validOrders = 0;
-    for (auto& o : orders) {
+    for (auto& order : orders) {
         bool validated = true;
-        if (o.getItems().empty()) {
+        if (order.getItems().empty()) {
             validated = false;
         }
 
         if (validated) {
-            o.setStatus("Valid");
+            order.setStatus("Valid");
             validOrders++;
         }
     }
@@ -30,23 +30,23 @@ std::vector<Order> OrderProcessor::calculatePricing(const std::vector<Order>& va
 
     auto orders = validOrders;
     int pricedOrders = 0;
-    for (auto& o : orders) {
-        if (o.getStatus() == "Valid") {
+    for (auto& order : orders) {
+        if (order.getStatus() == "Valid") {
             bool priced = false;
-            for (auto& s : o.getItems()) {
-                for (auto const& p : prices) {
-                    if (s == p.first) {
-                        o.setTotalPrice(o.getTotalPrice() + p.second);
+            for (auto& item : order.getItems()) {
+                for (auto const& priceTag : prices) {
+                    if (item == priceTag.first) {
+                        order.setTotalPrice(order.getTotalPrice() + priceTag.second);
                         priced = true;
                     }
                 }
             }
             if (priced) {
-                o.setStatus("Priced");
+                order.setStatus("Priced");
                 pricedOrders++;
             }
             else {
-                o.setStatus("Not Available");
+                order.setStatus("Not Available");
             }
         }
         
@@ -62,13 +62,13 @@ std::vector<Order> OrderProcessor::checkInventory(const std::vector<Order>& pric
 
     auto orders = pricedOrders;
     int availableOrders = 0;
-    for (auto& o : orders) {
-        if (o.getStatus() == "Priced") {
+    for (auto& order : orders) {
+        if (order.getStatus() == "Priced") {
             bool inStock = true;
-            for (auto& s : o.getItems()) {
+            for (auto& item : order.getItems()) {
                 bool itemAvailable = false;
-                for (auto& i : itemsInStock) {
-                    if (s == i) {
+                for (auto& itemInStock : itemsInStock) {
+                    if (item == itemInStock) {
                         itemAvailable = true;
                     }
                 }
@@ -77,11 +77,11 @@ std::vector<Order> OrderProcessor::checkInventory(const std::vector<Order>& pric
                 }
             }
             if (inStock) {
-                o.setStatus("Ready");
+                order.setStatus("Ready");
                 availableOrders++;
             }
             else {
-                o.setStatus("Not in Stock");
+                order.setStatus("Not in Stock");
             }
         }
        
@@ -95,15 +95,15 @@ void OrderProcessor::generateInvoices(const std::vector<Order>& finalOrders)
     std::cout << "[4] Generating Invoices...\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(300));
 
-    for (auto& o : finalOrders) {
-        if (o.getStatus() == "Ready") {
-            std::cout << "INVOICE #" << o.getId() << "\n";
-            int item = 1;
-            for (auto& s : o.getItems()) {
-                std::cout << "Item #" << item << " " << s << ": " << prices.at(s) << "$\n";
-                item++;
+    for (auto& order : finalOrders) {
+        if (order.getStatus() == "Ready") {
+            std::cout << "INVOICE #" << order.getId() << "\n";
+            int i = 1;
+            for (auto& item : order.getItems()) {
+                std::cout << "Item #" << item << " " << item << ": " << prices.at(item) << "$\n";
+                i++;
             }
-            std::cout << "++TOTAL PRICE : " << o.getTotalPrice() << "$ ++\n"; 
+            std::cout << "++TOTAL PRICE : " << order.getTotalPrice() << "$ ++\n";
         }
     }
 }

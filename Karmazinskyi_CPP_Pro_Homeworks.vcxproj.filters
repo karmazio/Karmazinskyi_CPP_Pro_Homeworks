@@ -44,6 +44,12 @@
     <ClInclude Include="OrderProcessor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UnsafeBankAccount.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeBankAccount.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

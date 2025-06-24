@@ -132,8 +132,10 @@
   <ItemGroup>
     <ClInclude Include="FileManager.hpp" />
     <ClInclude Include="OrderProcessor.hpp" />
+    <ClInclude Include="SafeBankAccount.hpp" />
     <ClInclude Include="Sensor.hpp" />
     <ClInclude Include="ThreadPool.hpp" />
+    <ClInclude Include="UnsafeBankAccount.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
